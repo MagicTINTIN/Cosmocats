@@ -14,4 +14,6 @@ Futur jeu en ligne de chats qui veulent aller dans l'espace<br>
 Jeu multijoueur jusqu'à 7 joueurs :
 Le but faire arriver ses chats en premier sur la lune.
 
+![Logo de Cosmocats](./images/animation/../cats/animation/catsanimation.gif)
+
 *(\*): Et un peu cons aussi*
