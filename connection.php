@@ -17,10 +17,10 @@ $texts = [
     [ "Aucune partie trouvée", "No game found"]
 ];
 
-if (!(isset($_POST['idgame']) || isset($_POST['create']))) {
+if (!isset($_POST['idgame']) && !isset($_POST['create'])) {
     $_SESSION['infoMsg'] = $texts[7][$lng];
     $_SESSION['errorMsg'] = $texts[7][$lng];
-    header("Location: ../");
+    header("Location: ./");
     exit();
 }
 
@@ -45,9 +45,9 @@ if (isset($_SESSION['infoMsg'])) {
         content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <title><?php echo $texts[3][$lng] ?> | Cosmocats</title>
 
-    <link href="../styles/vars.css" rel="stylesheet">
-    <link href="../styles/styles.css" rel="stylesheet">
-    <link href="../styles/connection.css" rel="stylesheet">
+    <link href="styles/vars.css" rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+    <link href="styles/connection.css" rel="stylesheet">
     <meta name="author" content="ALC ProduXion/Softplus">
     <meta name="description" content="Connection page to a game with cats which want to go to space">
 
@@ -96,8 +96,8 @@ if (isset($_SESSION['infoMsg'])) {
         </form>
     </div>
 
-    <script src="../scripts/cookies.js"></script>
-    <script src="../scripts/mainfunctions.js"></script>
+    <script src="scripts/cookies.js"></script>
+    <script src="scripts/mainfunctions.js"></script>
 </body>
 
 </html>
