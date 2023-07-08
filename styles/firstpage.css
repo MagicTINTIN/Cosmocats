@@ -1,5 +1,5 @@
 #idgameinput:invalid + #entergameid::after {
-  background-color: var(--light-gray);
+  background-color: var(--b8);
   color: var(--blackest);
 }
 
@@ -8,10 +8,10 @@
 }
 
 #idgameinput:valid + #entergameid::after {
-  background-color: var(--gray);
+  background-color: var(--b5);
   color: var(--whitest);
 }
 
 #idgameinput:valid + #entergameid:hover::after {
-  border: 2px solid var(--whitest);
+  border: 2px solid var(--b9);
 }

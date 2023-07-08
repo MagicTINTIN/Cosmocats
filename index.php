@@ -40,8 +40,8 @@ $texts = [
 
 <body>
     <div id="centeringbg">
-
         <section id="connecttogame" class="centeringnav">
+            <img id="welcomelogo" src="images/logo.png">
                 <h1><?php echo $texts[6][$lng] ?></h1>
                 <form action="game" method="post">
                     <input type="text" id="idgameinput" name="idgame" required

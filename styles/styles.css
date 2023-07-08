@@ -5,48 +5,84 @@ html, body {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
-    background-color: var(--gray);
-    color: var(--white);
+
     font-family: Arial, Helvetica, sans-serif
-}
-
-
-#nojs {
-    width: 100%;
-    height: 100%;
-    background-color: var(--dark-gray);
-    position: fixed;
-    top:0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-#nojs div{
-    width: 70%;
-    height: 80%;
-    background-color: var(--not-so-light-gray);
-    margin: auto;
-    color: var(--white);
-    text-align: center;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 }
 
 html {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    
 
+    background-color: var(--b3);
+    color: var(--b8);
+
+    background-image: url("../images/map/mapbackground.jpg");
+    background-size: cover;
+    background-position: center;
     width:100vw;
     height: 100vh;
+
+    transition: all .1s;
 }
 
+body {
+    width:100%;
+    height: 100%;
+    margin-top: 2vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    transition: all .2s;
+}
+
+
+#centeringbg {
+    width: calc(100% - 6vw);
+    height: calc(100% - 4vw);
+
+    padding: 1vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    background-color: var(--b5semi);
+
+    border-radius: var(--centeringborder);
+}
+
+/* ----------- Components ----------- */
+
+/* Buttons & inputs */
+button, input[type=submit] {
+    border: 2px solid var(--b2);
+    border-radius: 5px;
+    padding: 5px;
+
+    font-weight: bold;
+
+    background-color: var(--b4);
+    color: var(--b9);
+
+    transition: all .3s;
+}
+
+button:hover, input[type=submit]:hover {
+    background-color: var(--b3);
+}
+
+button:active, input[type=submit]:active {
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
+}
+
+
+/* Tables */
+
 table {
-    border: var(--gray) 1px solid;
+    border: var(--b5) 1px solid;
 }
 
 th {
@@ -55,69 +91,41 @@ th {
 
 thead {
     position: fixed;
-    /* border:#fff 2px solid; */
 }
 
 tr {
-    background-color: var(--dark-gray);
+    background-color: var(--b2);
 }
 
 tr:hover {
-    background-color: var(--gray);
+    background-color: var(--b5);
 }
 
-body {
 
-    width:100%;
-    height: 100%;
-    margin-top: 2vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
+/* Scrollbar */
 
-#centeringbg {
-    width: calc(100% - 4vw);
-    height: calc(100% - 2vw);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    background-color: var(--not-so-light-gray);
-}
-
-textarea {
-    border: var(--gray) 1px solid;
-    resize: none;
-}
-
-/* #ascii::-webkit-scrollbar {
+::-webkit-scrollbar {
+    width: 5px;
     height: 5px;
-    background: rgba(131, 131, 131, 0.384);
-} */
-
-.bfcodediv {
-    background-color: var(--dark-gray);
-    min-height: 1%;
-    width: 100%;
-    border: var(--gray) 1px solid;
+    background: var(--b5);
 }
 
-.bfcodediv:hover {
-    border: var(--light-gray) 1px solid;
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px var(--b7); 
+  border-radius: 10px;
 }
 
-#codeinputdiv {
-    height: 40vh;
-    width: 100%;
-    background-color: var(--dark-gray);
-    color: var(--white);
-
-    border: var(--gray) 1px solid;
+::-webkit-scrollbar-thumb {
+  background: var(--b7); 
+  border-radius: 10px;
 }
 
-#codeinputdiv:hover {
-    border: var(--light-gray) 1px solid;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--b8); 
 }
+
+
+/* Titles */
 
 h3 {
     margin-top: 5px;
@@ -129,103 +137,46 @@ h3 {
 h1 {
     width: 100%;
     text-align: center;
-    color: var(--whitest);
+    color: var(--b9);
     margin-bottom: 1vh;
     margin-top: 0;
     font-size: var(--fontsizebtn);
 }
 
-/* #codeinput {
-    height: 100%;
-    width: 100%;
-    background-color: var(--dark-gray);
-    color: var(--white);
-    overflow-y: auto;
-} */
 
-/* #codeinput:hover {
-    border: var(--light-gray) 1px solid;
-} */
-
-
-#output {
-    color: var(--white);
-    height: 15vh;
-    max-height: 20vh;
-    overflow-y: scroll;
-    font-family: monospace;
-}
-
-#memory {
-    color: var(--white);
-    height: 7vh;
-    max-width: 100%;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-}
-
-::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    background: var(--gray);
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px var(--light-gray); 
-  border-radius: 10px;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: var(--light-gray); 
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--white); 
-}
-
-#timesl {
-    /* background: linear-gradient(to right, #dddddd 0%, #d4d4d4 50%, #dfdfdf 50%, #fff 100%); */
-  /* border: solid 1px #9c9c9c; */
-  outline: none;
-  background-color: rgba(0, 0, 0, 0);
-}
+/* Links & texts */
 
 p {
     margin: 2px;
 }
 
-.thideontel {
-    display:block;
-}
-
-#maxstepstxt {
-    font-size: 1vh;
-    display: block;
-    color: var(--white);
-    text-align: center;
-}
-
-
 a {
-    color: var(--whitest);
+    color: var(--b9);
     text-decoration: none;
     font-weight: bold;
 }
 
 a:visited {
-    color: var(--whitest);
+    color: var(--b9);
 }
 
 a:hover {
-    color: var(--white);
+    color: var(--b8);
     font-weight: bolder;
-
 }
+
+/* ----------- Specific Objects ----------- */
+
+/* Language */
+
+#languageselection {
+    position: fixed;
+    top: 3vw;
+    right: 3vw;
+}
+
+
+/* Connexion page */
 
 #connecttogame {
     text-align: center;
@@ -234,55 +185,69 @@ a:hover {
     margin: auto;
 }
 
-#creategame {
-    text-align: center;
-    font-size: 3vw;
-    width: 90vw;
-    max-height: 85vh;
-    overflow-y: auto;
-    margin: auto;
+#welcomelogo {
+    height: 15vh;
+    width: 15vh;
 }
 
+
+/* Main Input */
 #idgameinput {
     width: var(--inputsizebtn);
+    padding: 2px;
+
+    border: var(--bordersizebtn) solid var(--b1);
+    border-radius: var(--inputradiusbtn);
+
     font-size: var(--fontsizebtn);
-    border: var(--bordersizebtn) solid var(--black);
-    border-radius: 0px;
     text-align: center;
     font-weight: bold;
-    padding: 2px;
-    background-color: var(--whitest);
-    color: var(--dark-gray);
+
+    background-color: var(--b9);
+    color: var(--b4);
+
+    transition: all .3s;
 }
 
 #idgameinput:focus, #idgameinput:focus-within {
-    border-radius: 0px;
-    border: var(--bordersizebtn) solid var(--black);
-    background-color: var(--whitest);
-    color: var(--dark-gray);
+    /* border-radius: calc( var(--inputradiusbtn) - var(--bordersizebtn)); */
+    border: var(--bordersizebtn) solid var(--b1);
+
+    background-color: var(--b9);
+    color: var(--b4);
+
     outline: none;
     box-shadow: inset 0px 0px 3px rgba(0,0,0,0.7);
 }
 
+
+/* Main Button */
 #entergameid {
-    margin-top: 1vh;
-    border: var(--bordersizebtn) solid var(--black);
-    font-size: var(--fontsizebtn);
     width: calc( var(--inputsizebtn) + 2 * var(--bordersizebtn) + 4px );
+    margin-top: 1vh;
     padding: 2px;
+
+    border: var(--bordersizebtn) solid var(--b1);
+    border-radius: var(--inputradiusbtn);
+
+    font-size: var(--fontsizebtn);
     font-weight: bold;
-    background-color: var(--dark-gray);
-    color: var(--whitest);
+
+    background-color: var(--b4);
+    color: var(--b9);
 }
 
 #entergameid:hover {
-    background-color: var(--black-hover);
+    background-color: var(--b3);
 }
 
 #entergameid:active {
+    /* border-radius: calc( var(--inputradiusbtn) - var(--bordersizebtn)); */
     box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
 }
 
+
+/* Footer */
 .centeringfoot {
     width: 30vw;
     margin: auto;
@@ -295,24 +260,38 @@ a:hover {
     justify-content: space-around;
 }
 
-@media only screen and (max-width: 850px) {
-    .thideontel {
-        display:none;
-    }
-}
+/* ----------- Responsive ----------- */
 
 
 @media only screen and (max-width: 550px) {
-    #ascii {
-        font-size:8px;
-    }
     th {
         font-size: 8px;
     }
 }
 
-@media only screen and (max-width: 850px) {
-    #maxstepstxt {
-        display: none;
-    }
+/* ----------- NOJS ----------- */
+
+#nojs {
+    width: 100%;
+    height: 100%;
+    background-color: var(--b2);
+    position: fixed;
+    top:0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#nojs div{
+    width: 70%;
+    height: 80%;
+    background-color: var(--b4);
+    margin: auto;
+    color: var(--b8);
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
