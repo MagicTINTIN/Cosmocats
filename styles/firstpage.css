@@ -1,0 +1,17 @@
+#idgameinput:invalid + #entergameid::after {
+  background-color: var(--light-gray);
+  color: var(--blackest);
+}
+
+#idgameinput:invalid + #entergameid:hover::after {
+  cursor: not-allowed;
+}
+
+#idgameinput:valid + #entergameid::after {
+  background-color: var(--gray);
+  color: var(--whitest);
+}
+
+#idgameinput:valid + #entergameid:hover::after {
+  border: 2px solid var(--whitest);
+}

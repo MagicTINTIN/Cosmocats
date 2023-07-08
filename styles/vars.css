@@ -1,0 +1,29 @@
+/* Dark mode */
+:root {
+    --blackest: #000000;
+    --black: #101414;
+    --black-hover: #202727;
+    --dark-gray: #404E4D;
+    --dark-desat-gray: #4F4F4F;
+    --gray: #728389;
+    --mid-gray: #8B9EA7;
+    --not-so-light-gray: #A4B8C4;
+    --light-gray: #C8D3D5;
+    --white: #E2E7E8;
+    --whitest: #FCFAFA;
+
+    --dark-red: #80382E;
+    --red: #D1462F; 
+    --dark-yellow: #9F9B4D;
+    --yellow: #FDE74C;
+    --dark-green: #6E8A45;
+    --green: #9BC53D;
+    --dark-blue: #4E879C;
+    --blue: #5BC0EB;
+
+    --websitefonts: Arial, Helvetica, sans-serif;
+
+    --inputsizebtn: calc(10vh + 15vw);
+    --bordersizebtn: calc(0.2vh + 0.2vw);
+    --fontsizebtn: calc(2vh + 2vw);
+}

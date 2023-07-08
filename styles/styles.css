@@ -1,0 +1,318 @@
+html, body {
+    padding: 0;
+    margin: auto;
+
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    background-color: var(--gray);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif
+}
+
+
+#nojs {
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-gray);
+    position: fixed;
+    top:0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#nojs div{
+    width: 70%;
+    height: 80%;
+    background-color: var(--not-so-light-gray);
+    margin: auto;
+    color: var(--white);
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+html {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    width:100vw;
+    height: 100vh;
+}
+
+table {
+    border: var(--gray) 1px solid;
+}
+
+th {
+    font-size: 15px;
+}
+
+thead {
+    position: fixed;
+    /* border:#fff 2px solid; */
+}
+
+tr {
+    background-color: var(--dark-gray);
+}
+
+tr:hover {
+    background-color: var(--gray);
+}
+
+body {
+
+    width:100%;
+    height: 100%;
+    margin-top: 2vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#centeringbg {
+    width: calc(100% - 4vw);
+    height: calc(100% - 2vw);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: var(--not-so-light-gray);
+}
+
+textarea {
+    border: var(--gray) 1px solid;
+    resize: none;
+}
+
+/* #ascii::-webkit-scrollbar {
+    height: 5px;
+    background: rgba(131, 131, 131, 0.384);
+} */
+
+.bfcodediv {
+    background-color: var(--dark-gray);
+    min-height: 1%;
+    width: 100%;
+    border: var(--gray) 1px solid;
+}
+
+.bfcodediv:hover {
+    border: var(--light-gray) 1px solid;
+}
+
+#codeinputdiv {
+    height: 40vh;
+    width: 100%;
+    background-color: var(--dark-gray);
+    color: var(--white);
+
+    border: var(--gray) 1px solid;
+}
+
+#codeinputdiv:hover {
+    border: var(--light-gray) 1px solid;
+}
+
+h3 {
+    margin-top: 5px;
+    margin-bottom: 2px;
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
+    color: var(--whitest);
+    margin-bottom: 1vh;
+    margin-top: 0;
+    font-size: var(--fontsizebtn);
+}
+
+/* #codeinput {
+    height: 100%;
+    width: 100%;
+    background-color: var(--dark-gray);
+    color: var(--white);
+    overflow-y: auto;
+} */
+
+/* #codeinput:hover {
+    border: var(--light-gray) 1px solid;
+} */
+
+
+#output {
+    color: var(--white);
+    height: 15vh;
+    max-height: 20vh;
+    overflow-y: scroll;
+    font-family: monospace;
+}
+
+#memory {
+    color: var(--white);
+    height: 7vh;
+    max-width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background: var(--gray);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px var(--light-gray); 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--light-gray); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--white); 
+}
+
+#timesl {
+    /* background: linear-gradient(to right, #dddddd 0%, #d4d4d4 50%, #dfdfdf 50%, #fff 100%); */
+  /* border: solid 1px #9c9c9c; */
+  outline: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+p {
+    margin: 2px;
+}
+
+.thideontel {
+    display:block;
+}
+
+#maxstepstxt {
+    font-size: 1vh;
+    display: block;
+    color: var(--white);
+    text-align: center;
+}
+
+
+a {
+    color: var(--whitest);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:visited {
+    color: var(--whitest);
+}
+
+a:hover {
+    color: var(--white);
+    font-weight: bolder;
+
+}
+
+#connecttogame {
+    text-align: center;
+    font-size: 3vw;
+    width: 50vw;
+    margin: auto;
+}
+
+#creategame {
+    text-align: center;
+    font-size: 3vw;
+    width: 90vw;
+    max-height: 85vh;
+    overflow-y: auto;
+    margin: auto;
+}
+
+#idgameinput {
+    width: var(--inputsizebtn);
+    font-size: var(--fontsizebtn);
+    border: var(--bordersizebtn) solid var(--black);
+    border-radius: 0px;
+    text-align: center;
+    font-weight: bold;
+    padding: 2px;
+    background-color: var(--whitest);
+    color: var(--dark-gray);
+}
+
+#idgameinput:focus, #idgameinput:focus-within {
+    border-radius: 0px;
+    border: var(--bordersizebtn) solid var(--black);
+    background-color: var(--whitest);
+    color: var(--dark-gray);
+    outline: none;
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.7);
+}
+
+#entergameid {
+    margin-top: 1vh;
+    border: var(--bordersizebtn) solid var(--black);
+    font-size: var(--fontsizebtn);
+    width: calc( var(--inputsizebtn) + 2 * var(--bordersizebtn) + 4px );
+    padding: 2px;
+    font-weight: bold;
+    background-color: var(--dark-gray);
+    color: var(--whitest);
+}
+
+#entergameid:hover {
+    background-color: var(--black-hover);
+}
+
+#entergameid:active {
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
+}
+
+.centeringfoot {
+    width: 30vw;
+    margin: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+@media only screen and (max-width: 850px) {
+    .thideontel {
+        display:none;
+    }
+}
+
+
+@media only screen and (max-width: 550px) {
+    #ascii {
+        font-size:8px;
+    }
+    th {
+        font-size: 8px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    #maxstepstxt {
+        display: none;
+    }
+}
