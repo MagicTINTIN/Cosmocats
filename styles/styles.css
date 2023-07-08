@@ -1,3 +1,51 @@
+/* Animations */
+
+@keyframes error {
+    0% {
+        transform: rotate(-5deg);
+    }
+
+    10% {
+        transform: rotate(5deg);
+    }
+
+    20% {
+        transform: rotate(-4deg);
+    }
+
+    30% {
+        transform: rotate(4deg);
+    }
+
+    50% {
+        transform: rotate(-3deg);
+    }
+
+    70% {
+        transform: rotate(2deg);
+    }
+
+    90% {
+        transform: rotate(-1deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes info {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Html Body and Centeringbg */
+
 html, body {
     padding: 0;
     margin: auto;
@@ -18,9 +66,6 @@ html {
     background-color: var(--b3);
     color: var(--b8);
 
-    background-image: url("../images/map/mapbackground.jpg");
-    background-size: cover;
-    background-position: center;
     width:100vw;
     height: 100vh;
 
@@ -167,6 +212,75 @@ a:hover {
 
 /* ----------- Specific Objects ----------- */
 
+/* Messages */
+
+.msg {
+    width: 50vw;
+    padding: 8px;
+    border-radius: 9px;
+    margin-bottom: 1vh;
+
+    font-size: large;
+
+    background-color: var(--b9);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    transition: all .3s;
+}
+
+.msg span {
+    padding: 5px;
+}
+
+.closeMsg {
+    font-weight: bolder;
+    border-radius: 5px;
+    transition: all .3s;
+}
+
+#errorMsg {
+    animation: error .8s;
+    color: var(--red);
+}
+
+#infoMsg {
+    animation: info .8s;
+    color: var(--green);
+}
+
+#errorMsg .closeMsg {
+    background-color: var(--red);
+    color: var(--b9);
+}
+
+#infoMsg .closeMsg {
+    background-color: var(--green);
+    color: var(--b9);
+}
+
+#errorMsg .closeMsg:hover {
+    background-color: var(--dark-red);
+    color: var(--b8);
+}
+
+#infoMsg .closeMsg:hover {
+    background-color: var(--dark-green);
+    color: var(--b8);
+}
+
+#errorMsg .closeMsg:active {
+    background-color: var(--b1);
+    color: var(--b7);
+}
+
+#infoMsg .closeMsg:active {
+    background-color: var(--b1);
+    color: var(--b7);
+}
+
 /* Language */
 
 #languageselection {
@@ -176,76 +290,11 @@ a:hover {
 }
 
 
-/* Connexion page */
-
-#connecttogame {
-    text-align: center;
-    font-size: 3vw;
-    width: 50vw;
-    margin: auto;
+.worldmap {
+    background-image: url("../images/map/mapbackground.jpg");
+    background-size: cover;
+    background-position: center;
 }
-
-#welcomelogo {
-    height: 15vh;
-    width: 15vh;
-}
-
-
-/* Main Input */
-#idgameinput {
-    width: var(--inputsizebtn);
-    padding: 2px;
-
-    border: var(--bordersizebtn) solid var(--b1);
-    border-radius: var(--inputradiusbtn);
-
-    font-size: var(--fontsizebtn);
-    text-align: center;
-    font-weight: bold;
-
-    background-color: var(--b9);
-    color: var(--b4);
-
-    transition: all .3s;
-}
-
-#idgameinput:focus, #idgameinput:focus-within {
-    /* border-radius: calc( var(--inputradiusbtn) - var(--bordersizebtn)); */
-    border: var(--bordersizebtn) solid var(--b1);
-
-    background-color: var(--b9);
-    color: var(--b4);
-
-    outline: none;
-    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.7);
-}
-
-
-/* Main Button */
-#entergameid {
-    width: calc( var(--inputsizebtn) + 2 * var(--bordersizebtn) + 4px );
-    margin-top: 1vh;
-    padding: 2px;
-
-    border: var(--bordersizebtn) solid var(--b1);
-    border-radius: var(--inputradiusbtn);
-
-    font-size: var(--fontsizebtn);
-    font-weight: bold;
-
-    background-color: var(--b4);
-    color: var(--b9);
-}
-
-#entergameid:hover {
-    background-color: var(--b3);
-}
-
-#entergameid:active {
-    /* border-radius: calc( var(--inputradiusbtn) - var(--bordersizebtn)); */
-    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
-}
-
 
 /* Footer */
 .centeringfoot {

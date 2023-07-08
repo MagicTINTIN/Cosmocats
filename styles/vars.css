@@ -24,8 +24,9 @@
     --websitefonts: Arial, Helvetica, sans-serif;
 
     --centeringborder: calc(.5vh + .5vw);
-    
-    --inputsizebtn: calc(10vh + 15vw);
+
+    --gidinputsizebtn: calc(10vh + 15vw);
+    --psdinputsizebtn: calc(10vh + 40vw);
     --inputradiusbtn: calc(.5vh + .75vw);
     --bordersizebtn: calc(0.2vh + 0.2vw);
     --fontsizebtn: calc(2vh + 2vw);

@@ -15,16 +15,25 @@ $texts = [
     [ "A propos", "About" ],
     [ "Jouez à Cosmocats", "Play Cosmocats" ],
     [ "Entrez le code que l'on vous a partagé","Enter the code shared with you" ],
-    [ "Entrez", "Enter" ],
-]
+    [ "Jouer", "Play" ],
+];
+
+if (isset($_SESSION['errorMsg'])) {
+    $errorMessage = $_SESSION['errorMsg'];
+    unset($_SESSION['errorMsg']);
+}
+if (isset($_SESSION['infoMsg'])) {
+    $infoMessage = $_SESSION['infoMsg'];
+    unset($_SESSION['infoMsg']);
+}
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" id="background" class="worldmap">
 
 <head>
     <meta charset="utf-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> -->
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="viewport"
         content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
@@ -32,6 +41,7 @@ $texts = [
 
     <link href="styles/vars.css" rel="stylesheet">
     <link href="styles/styles.css" rel="stylesheet">
+    <link href="styles/welcome.css" rel="stylesheet">
     <meta name="author" content="ALC ProduXion/Softplus">
     <meta name="description" content="Game with cats which want to go to space">
 
@@ -41,29 +51,46 @@ $texts = [
 <body>
     <div id="centeringbg">
         <section id="connecttogame" class="centeringnav">
+
+            <?php if(isset($errorMessage)) : ?>
+                <div id="errorMsg" role="alert" class="msg">
+                    <span></span>
+                    <span><?php echo $errorMessage; ?></span>
+                    <span onclick="deleteMsg('error')" ontouchstart="deleteMsg('error')" class="closeMsg">X</span>
+                </div>
+            <?php endif;
+            if(isset($infoMessage)) : ?>
+                <div id="infoMsg" class="msg">
+                    <span></span>
+                    <span><?php echo $infoMessage; ?></span>
+                    <span onclick="deleteMsg('info')" ontouchstart="deleteMsg('info')" class="closeMsg">X</span>
+                </div>
+            <?php endif; ?>
+
             <img id="welcomelogo" src="images/logo.png">
                 <h1><?php echo $texts[6][$lng] ?></h1>
-                <form action="game" method="post">
+                <form action="connection" method="post">
                     <input type="text" id="idgameinput" name="idgame" required
                         placeholder="000000"
                         pattern="[0-9]{6}"
                         minlength="6" maxlength="6" size="6" title="<?php echo $texts[7][$lng] ?>">
                         <br>
-                    <button id="entergameid"><?php echo $texts[8][$lng] ?></button>
+                    <input type="submit" id="entergameid" name="language" value="<?php echo $texts[8][$lng] ?>" />
                 </form>
         </section>
 
         <footer class="centeringfoot">
             <form method="post">
-            <input type="submit" name="rules" value="<?php echo $texts[3][$lng] ?>" />
+                <input type="submit" name="rules" value="<?php echo $texts[3][$lng] ?>" />
             </form>
 
-            <form action="game/create.php" method="post">
-            <input type="submit" name="create" value="<?php echo $texts[4][$lng] ?>" />
+            <form action="connection" method="post">
+                <input type="hidden" name="creation" value="true" />
+                <input type="submit" name="create" value="<?php echo $texts[4][$lng] ?>" />
             </form>
 
             <form method="post">
-            <input type="submit" name="about" value="<?php echo $texts[5][$lng] ?>" />
+                <input type="submit" name="about" value="<?php echo $texts[5][$lng] ?>" />
             </form> 
         </footer>
         <div id="nojs">

@@ -1,0 +1,98 @@
+#connecttogame {
+    text-align: center;
+    font-size: 3vw;
+    width: 50vw;
+    margin: auto;
+}
+
+#welcomelogo {
+    height: 15vh;
+    width: 15vh;
+}
+
+
+/* Main Input */
+#idgameinput {
+    width: var(--gidinputsizebtn);
+    padding: 2px;
+
+    border: var(--bordersizebtn) solid var(--b1);
+    border-radius: var(--inputradiusbtn);
+
+    font-size: var(--fontsizebtn);
+    text-align: center;
+    font-weight: bold;
+
+    background-color: var(--b9);
+    color: var(--b4);
+
+    transition: all .3s;
+}
+
+#idgameinput:focus, #idgameinput:focus-within {
+    /* border-radius: calc( var(--inputradiusbtn) - var(--bordersizebtn)); */
+    border: var(--bordersizebtn) solid var(--b1);
+
+    background-color: var(--b9);
+    color: var(--b4);
+
+    outline: none;
+    box-shadow: inset 0px 0px 3px rgba(0,0,0,0.7);
+}
+
+
+/* Main Button */
+#entergameid {
+    width: calc( var(--gidinputsizebtn) + 2 * var(--bordersizebtn) + 4px );
+    margin-top: 1vh;
+    padding: 2px;
+
+    border: var(--bordersizebtn) solid var(--b1);
+    border-radius: var(--inputradiusbtn);
+
+    font-size: var(--fontsizebtn);
+    font-weight: bold;
+
+    background-color: var(--b4);
+    color: var(--b9);
+}
+
+#entergameid:hover {
+    background-color: var(--b3);
+}
+
+#entergameid:active {
+    /* border-radius: calc( var(--inputradiusbtn) - var(--bordersizebtn)); */
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
+}
+
+#idgameinput:invalid {
+  filter: saturate(0);
+}
+
+#idgameinput:invalid ~ #entergameid {
+  /* background-color: var(--dark-red);
+  color: var(--red); */
+  background-color: var(--b3);
+  filter: saturate(0);
+  cursor: not-allowed;
+  
+}
+
+#idgameinput:invalid ~ #entergameid:hover {
+  cursor: not-allowed;
+}
+
+#idgameinput:invalid ~ #entergameid:active {
+  cursor: not-allowed;
+  box-shadow:none;
+}
+
+#idgameinput:valid + #entergameid {
+  background-color: var(--b5);
+  color: var(--whitest);
+}
+
+#idgameinput:valid + #entergameid:hover {
+  border: 2px solid var(--b9);
+}
