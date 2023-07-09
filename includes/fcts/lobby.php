@@ -136,11 +136,13 @@ function joinLobby( int $lng, string $gameID, string $nickname ) : array
     return $lobby;
 }
 
-function quitLobby( int $lng, int $ID, string $gameID, string $nickname ) : array
+function quitLobby( int $lng, int $ID, string $gameID, string $nickname, int $reason = 0 ) : array
 {
     $qlbtxt = [
         [ "La partie dans laquelle se trouve %s n'a pas été trouvée","The game %s is in was not found" ],
         [ "%s n'était déjà plus dans la partie", "%s was already out of the game" ],
+        [ [ "Vous (%s) avez correctement été déconnecté de la partie %s", "%s a bien été expulsé de la partie %s"], ["You (%s) have been successfully disconnected from the game %s", "%s has been successfully ejected from the game %s"] ],
+        [ "La partie %s a bien été supprimée en vous déconnectant", "The game %s have successfully been deleted when you disconnected yourself" ],
     ];
 
     $db = dbConnect();
@@ -152,9 +154,11 @@ function quitLobby( int $lng, int $ID, string $gameID, string $nickname ) : arra
             'reason' => sprintf($qlbtxt[0][$lng], $nickname)
         ];
     
-    if (strlen($lobby['infos']['playerList'] > 0)) {
+    $nbejected = 0;
+
+    if (strlen($lobby['game']['playerList'] > 0)) {
         $playersArray = explode('┇', $lobby['game']['playerList']);
-        $nbejected = 0;
+        
         foreach ($playersArray as $playerobj) {
             if (str_starts_with($playerobj, $nickname . '┊')) {
                 $playersArray = array_diff($playersArray, array("$playerobj"));
@@ -162,27 +166,49 @@ function quitLobby( int $lng, int $ID, string $gameID, string $nickname ) : arra
             }
         }
     }
-    else 
-        $playersArray = [];
+    else {
+        $sqlQuery = 'UPDATE game SET gameState = 3 WHERE gameID = :gameID AND ID = :ID';
+
+        $updateGame = $db->prepare($sqlQuery);
+        $updateGame->execute([
+            'ID' => $ID,
+            'gameID' => $gameID,
+        ]);
+
+        return [
+            'found' => false,
+            'infos' => sprintf($qlbtxt[3][$lng], $gameID)
+        ];
+    }
     
     $playersUpdated = implode('┇', $playersArray);
 
     if ($nbejected > 0) {
 
-        $sqlQuery = 'UPDATE game SET playerList = :players, nbConnected = :nbco WHERE gameID = :gameID AND ID = :ID';
+        $newcount = count($playersArray);
+        $newstate = ($newcount == 0) ? 3 : $lobby['game']['gameState'];
+
+        $sqlQuery = 'UPDATE game SET playerList = :players, nbConnected = :nbco, gameState = :gameState WHERE gameID = :gameID AND ID = :ID';
 
         $updateGame = $db->prepare($sqlQuery);
         $updateGame->execute([
             'ID' => $ID,
             'gameID' => $gameID,
             'players' => $playersUpdated,
-            'nbco' => count($playersArray),
+            'nbco' => $newcount,
+            'gameState' => $newstate,
         ]);
 
-        return [
-            'found' => true,
-            'infos' => sprintf($qlbtxt[0][$lng], $nickname)
-        ];
+        if ($newstate == 3)
+            return [
+                'found' => true,
+                'infos' => sprintf($qlbtxt[3][$lng], $gameID)
+            ];
+        else
+            return [
+                'found' => true,
+                'infos' => sprintf($qlbtxt[2][$lng][$reason], $nickname, $gameID)
+            ];
     }
     else
         return [
