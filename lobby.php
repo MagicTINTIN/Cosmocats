@@ -40,7 +40,11 @@ if (isset($_SESSION['infoMsg'])) {
 
     <link href="styles/vars.css" rel="stylesheet">
     <link href="styles/styles.css" rel="stylesheet">
-    <link href="styles/welcome.css" rel="stylesheet">
+    <link href="styles/lobby.css" rel="stylesheet">
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+    <script src="./scripts/localWS.js"></script>
+
     <meta name="author" content="ALC ProduXion/Softplus">
     <meta name="description" content="Game with cats which want to go to space">
 
@@ -49,14 +53,12 @@ if (isset($_SESSION['infoMsg'])) {
 
 <body>
     <div id="centeringbg">
-        <section id="connecttogame" class="centeringnav">
+        <section id="lobbycontainer" class="centeringnav">
 
             <?php include_once("includes/messages.php") ?>
 
                 <h1><?php echo $texts[1][$lng] ?></h1>
-                <form method="post">
-                    <input type="submit" id="entergameid" name="language" value="hmmmm" />
-                </form>
+                <div id="lobby"></div>
         </section>
 
         <?php include_once("includes/commonjslng.php") ?>
@@ -64,6 +66,19 @@ if (isset($_SESSION['infoMsg'])) {
 
     <script src="scripts/cookies.js"></script>
     <script src="scripts/mainfunctions.js"></script>
+
+    <script type="text/javascript">
+        // When the document has loaded
+        function ctgExec() {
+            sendGame('<?php echo $_SESSION['ID'] . '|'. $_SESSION['gameID'] ?>', 'connect');
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            // Connect to the websocket
+            connect();
+            inGame = 1;
+        });
+        
+    </script>
 </body>
 
 </html>

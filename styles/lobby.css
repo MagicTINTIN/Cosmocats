@@ -1,0 +1,67 @@
+#lobbyDiv {
+    width: 90vw;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    transition: all .2s;
+}
+
+#lbMap {
+    width: 70vw;
+    height: 80vh;
+    background: var(--b4semi);
+    border-radius: var(--centeringborder);
+}
+
+#lbLeftPanel {
+    width: 15vw;
+    height: 80vh;
+    max-width: 15vw;
+    max-height: 80vh;
+
+    padding: 5px;
+
+    background: var(--b3semi);
+    border-radius: var(--centeringborder);
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: column;
+}
+
+#lbSeparator {
+    width: .2vw;
+    height: 80vh;
+    background: var(--b8);
+}
+
+#lbhr {
+    width: 90%;
+}
+
+@media only screen and (max-width: 1080px) {
+    #lobbyDiv {
+        flex-direction: column-reverse;
+    }
+    #lbMap {
+        width: 90vw;
+        height: 50vh;
+    }
+
+    #lbLeftPanel {
+        width: 90vw;
+        height: 25vh;
+        max-width: 90vw;
+        max-height: 25vh;
+
+        flex-direction: column-reverse;
+    }
+    #lbSeparator {
+        width: 90vw;
+        height: .3vh;
+    }
+}

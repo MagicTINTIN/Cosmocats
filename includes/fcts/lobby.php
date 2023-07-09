@@ -283,4 +283,21 @@ function createLobby(int $lng) : array
         ];
 }
 
+function gameStatus(int $id, string $gameid) : array
+{
+    $db = dbConnect();
+
+    $gameStatement = $db->prepare('SELECT gameState, nbConnected, playerList, Player1, Player2, Player3, Player4, Player5, Player6, Player7 FROM game WHERE ID = :ID AND gameID = :gameid');
+    $gameStatement->execute([ 'ID' => $id, 'gameid' => $gameid ]);
+    $games = $gameStatement->fetchAll();
+
+    $nbgame = count($games);
+    if ($nbgame != 1) return [ 'found' => false ];
+    
+    return [ 
+        'found' => true,
+        'game' => $games[0]
+    ];
+}
+
 ?>

@@ -7,7 +7,7 @@ Futur jeu en ligne de chats qui veulent aller dans l'espace<br>
 ![Logo de Cosmocats](./images/logo.jpg)
 
 ---
-⚠️ Le projet est en developpement (enfin là y a même pas encore de code) ⚠️
+⚠️ Le projet est en développement... donc euh, c'est sûr que ça marche ⚠️
 
 ---
 
@@ -16,4 +16,4 @@ Le but faire arriver ses chats en premier sur la lune.
 
 ![Logo de Cosmocats](./images/animation/../cats/animation/catsanimation.gif)
 
-*(\*): Et un peu cons aussi*
+*(\*) : Et un peu cons aussi*

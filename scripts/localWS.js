@@ -16,7 +16,7 @@ const connect = function () {
         socket.onopen = (e) => {
             // Connection message
             socket.send(JSON.stringify({
-                "from": "katoo",
+                "from": "cosmocats",
                 "type": "load",
                 "loaded": true
             }));
@@ -31,8 +31,8 @@ const connect = function () {
             if (parsedData.append === true) {
                 if (parsedData.dataText.startsWith('WSConnectionOK'))
                     ctgExec();
-                else if (inGame == 1 && parsedData.dataText.startsWith('refreshPlayers'))
-                    $('#lobby').load('includes/updateParts/lobby.php');
+                else if (inGame == 1 && parsedData.dataText.startsWith('refreshLobby'))
+                    $('#lobby').load('includes/updt/lobby.php');
                 // if (isInGame && parsedData.dataText.startsWith('Game ping'))
                 //     $('#gameDiv').load('includes/updateParts/ping.php');
             }
@@ -58,7 +58,7 @@ function sendGame(gameid, type = 'ping') {
     if (!gameid || gameid == 0) return console.log("No gameid")
     if (isOpen(socket)) {
         socket.send(JSON.stringify({
-            "from": "cosmoplayer",
+            "from": "cosmocats",
             "type": type,
             "senttime": Date.now(),
             "gameid": gameid
