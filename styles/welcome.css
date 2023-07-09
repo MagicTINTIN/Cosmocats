@@ -12,7 +12,7 @@
 
 
 /* Main Input */
-#idgameinput {
+#gameidinput {
     width: var(--gidinputsizebtn);
     padding: 2px;
 
@@ -29,7 +29,7 @@
     transition: all .3s;
 }
 
-#idgameinput:focus, #idgameinput:focus-within {
+#gameidinput:focus, #gameidinput:focus-within {
     /* border-radius: calc( var(--inputradiusbtn) - var(--bordersizebtn)); */
     border: var(--bordersizebtn) solid var(--b1);
 
@@ -66,11 +66,11 @@
     box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
 }
 
-#idgameinput:invalid {
+#gameidinput:invalid {
   filter: saturate(0);
 }
 
-#idgameinput:invalid ~ #entergameid {
+#gameidinput:invalid ~ #entergameid {
   /* background-color: var(--dark-red);
   color: var(--red); */
   background-color: var(--b3);
@@ -79,20 +79,20 @@
   
 }
 
-#idgameinput:invalid ~ #entergameid:hover {
+#gameidinput:invalid ~ #entergameid:hover {
   cursor: not-allowed;
 }
 
-#idgameinput:invalid ~ #entergameid:active {
+#gameidinput:invalid ~ #entergameid:active {
   cursor: not-allowed;
   box-shadow:none;
 }
 
-#idgameinput:valid + #entergameid {
+#gameidinput:valid + #entergameid {
   background-color: var(--b5);
   color: var(--whitest);
 }
 
-#idgameinput:valid + #entergameid:hover {
+#gameidinput:valid + #entergameid:hover {
   border: 2px solid var(--b9);
 }

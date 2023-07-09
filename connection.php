@@ -17,11 +17,44 @@ $texts = [
     [ "Aucune partie trouvée", "No game found"]
 ];
 
-if (!isset($_POST['idgame']) && !isset($_POST['create'])) {
+include_once('includes/fcts/tools.php');
+include_once('includes/fcts/db.php');
+include_once('includes/fcts/lobby.php');
+
+if (!isset($_REQUEST['gameid']) && !isset($_POST['create'])) {
     $_SESSION['infoMsg'] = $texts[7][$lng];
     $_SESSION['errorMsg'] = $texts[7][$lng];
     header("Location: ./");
     exit();
+}
+
+if (isset($_GET['gameid'])) {
+    $joinData = getJoinLobby($lng, htmlspecialchars($_GET['gameid']));
+    if ($joinData['found'])
+        $infoMessageJG = 'game ' . $joinData['infos']['gameID'] . ' : ' . $joinData['infos']['gameName'] . ' (' . $joinData['infos']['quizzID'] 
+                        . ')<br>Hosted by ' . $joinData['infos']['gameOwner'] . '<br>'
+                        . ($joinData['infos']['nbConnected'] + 1) . '/' . $joinData['infos']['roomSize'] . ' players';
+    else {
+        $errorMessageJG = $joinData['reason'];
+        $errorType = $joinData['type'];
+    }
+}
+
+elseif (isset($_POST['gameIDconnect']) && isset($_POST['nickname'])) {
+    $joinData = joinLobby($lng, htmlspecialchars($_POST['gameIDconnect']), htmlspecialchars($_POST['nickname']));
+    if ($joinData['found']) {
+        $infoMessageJG = 'You are connected in the lobby';
+        $_SESSION['game'] = $joinData['infos'];
+        $_SESSION['nickgame'] = htmlspecialchars($_POST['nickname']);
+    }
+        // $infoMessageJG = 'connected as '. htmlspecialchars($_POST['nickname'])
+        //                 .'<br>in the game game ' . $joinData['infos']['gameID'] . ' : ' . $joinData['infos']['gameName'] . ' (' . $joinData['infos']['quizzID'] 
+        //                 . ')<br>Hosted by ' . $joinData['infos']['gameOwner'] . '<br>'
+        //                 . ($joinData['infos']['nbConnected'] + 1) . '/' . $joinData['infos']['roomSize'] . ' players';
+    else {
+        $errorMessageJG = $joinData['reason'];
+        $errorType = $joinData['type'];
+    }
 }
 
 if (isset($_SESSION['errorMsg'])) {
@@ -74,7 +107,7 @@ if (isset($_SESSION['infoMsg'])) {
                 <?php endif; ?>
 
                 <h1><?php echo $texts[4][$lng] ?></h1>
-                <form action="game" method="post">
+                <form action="lobby" method="post">
                     <input type="text" id="pseudoinput" name="pseudo" required
                         placeholder="<?php echo $texts[5][$lng] ?>"
                         pattern="[a-zA-Z0-9_-]+"

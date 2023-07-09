@@ -70,7 +70,7 @@ if (isset($_SESSION['infoMsg'])) {
             <img id="welcomelogo" src="images/logo.png">
                 <h1><?php echo $texts[6][$lng] ?></h1>
                 <form action="connection" method="post">
-                    <input type="text" id="idgameinput" name="idgame" required
+                    <input type="text" id="gameidinput" name="gameid" required
                         placeholder="000000"
                         pattern="[0-9]{6}"
                         minlength="6" maxlength="6" size="6" title="<?php echo $texts[7][$lng] ?>">
