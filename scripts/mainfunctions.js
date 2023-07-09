@@ -24,8 +24,11 @@ function deleteMsg(type) {
 async function copytcb(text) {
     try {
         await navigator.clipboard.writeText(text);
-        console.log('Content copied to clipboard');
+        console.log('Link copied to clipboard');
+        return 0;
+
     } catch (err) {
         console.error('Failed to copy: ', err);
+        return 1;
     }
 }

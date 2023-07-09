@@ -1,3 +1,5 @@
+/* Lobby divs */
+
 #lobbyDiv {
     width: 90vw;
     height: 82vh;
@@ -46,6 +48,7 @@
 #lbhr {
     width: 95%;
 }
+
 
 /* Share */
 
@@ -103,12 +106,69 @@
 
 #qrlink:active {
     cursor: grabbing;
-    background-color: var(--green);
 }
 
 #qrlink:not(:active) {
-    transition: background-color 700ms;
+    transition: all 700ms;
 }
+
+
+/* Ordonned list */
+ul {
+    padding: 0px;
+    list-style-type: none;
+}
+
+li {
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: all .3s;
+    font-weight: bold;
+}
+
+.li0 {
+    background-color: var(--b4);
+}
+
+.li1 {
+    background-color: var(--b5);
+}
+
+.li0:hover, .li1:hover {
+    background-color: var(--b3);
+}
+
+.listnumber {
+    margin-right: 6px;
+
+    padding: 2px;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-radius: 3px;
+    
+    background-color: var(--b8);
+    color: var(--b1);
+    transition: all .2s;
+}
+
+.listnumber:hover {
+    background-color: var(--b7);
+}
+
+.listyou {
+    margin-left: 5px;
+    padding: 1px;
+    border-radius: 3px;
+    background-color: var(--b4semi);
+    transition: all .2s;
+}
+
+.listyou:hover {
+    background-color: var(--b2);
+}
+
+/* Specific Elements */
 
 #choosecountryTitle {
     margin-top: 0;
