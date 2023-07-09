@@ -43,6 +43,7 @@ if (isset($_SESSION['infoMsg'])) {
     <link href="styles/lobby.css" rel="stylesheet">
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="./scripts/localWS.js"></script>
 
     <meta name="author" content="ALC ProduXion/Softplus">
@@ -57,7 +58,7 @@ if (isset($_SESSION['infoMsg'])) {
 
             <?php include_once("includes/messages.php") ?>
 
-                <h1><?php echo $texts[1][$lng] ?></h1>
+                <h1 id="choosecountryTitle"><?php echo $texts[1][$lng] ?></h1>
                 <div id="lobby"></div>
         </section>
 

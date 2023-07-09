@@ -218,6 +218,7 @@ a:hover {
     width: 50vw;
     padding: 8px;
     border-radius: 9px;
+    margin: auto;
     margin-bottom: 1vh;
 
     font-size: large;

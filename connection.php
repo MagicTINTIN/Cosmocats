@@ -50,6 +50,7 @@ elseif (isset($_POST['gameid']) && isset($_POST['nickname'])) {
         $_SESSION['ID'] = $joinData['infos']['ID'];
         $_SESSION['nickname'] = $nickname;
         header("Location: ./lobby");
+        exit();
     }
     else {
         $_SESSION['errorMsg'] = $joinData['reason'];

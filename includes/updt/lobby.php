@@ -11,7 +11,9 @@ $updtLBtexts = [
     [ "Liste des joueurs", "Player list"],
     [ "Jouer !", "Play !" ],
     [ " (vous) ", " (you) " ],
-    [ "Quelque chose de bizarre s'est passé...", "Something wrong has occured..."]
+    [ "Quelque chose de bizarre s'est passé...", "Something wrong has occured..."],
+    [ "Partagez la partie", "Share the game" ],
+    [ "Cliquez pour copier", "Click to copy" ],
 ];
 
 if ( !(isset($_SESSION['ID']) && isset($_SESSION['gameID']) && isset($_SESSION['game']) && isset($_SESSION['nickname'])) ) {
@@ -42,6 +44,13 @@ $_SESSION['game'] = $gameData['game']
     <div id="lbSeparator"></div>
     <div id="lbLeftPanel">
         <div id="lbPlayerList">
+            <div id="sharelink">
+                <div id="sharetexts">
+                <h3 id="qrtitle"><?php echo $updtLBtexts[5][$lng] ?></h3>
+                <p id="qrlink" onclick="cplink()" ontouchstart="cplink()" title="<?php $updtLBtexts[6][$lng] ?>"></p>
+                </div>
+                <div id="qrcode"></div>
+            </div>
             <h3><?php echo $updtLBtexts[1][$lng] ?></h3>
             <ol>
                 <?php
@@ -67,3 +76,13 @@ $_SESSION['game'] = $gameData['game']
         <?php } ?>
     </div>
 </div>
+
+<script>
+    var webpage = `http://${window.location.hostname}/Cosmocats/<?php echo $_SESSION['gameID'] ?>`;
+    var qrc = new QRCode(document.getElementById("qrcode"), webpage);
+    document.getElementById("qrlink").innerText = webpage;
+    
+    function cplink() {
+        copytcb(webpage)
+    }
+</script>
