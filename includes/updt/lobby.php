@@ -42,93 +42,22 @@ $_SESSION['game'] = $gameData['game']
 <div id="lobbyDiv">
     <div id="lbMap">
         <h3><?php echo $updtLBtexts[0][$lng] ?></h3>
+
+        <?php include_once('lobby/map.php') ?>
     </div>
     <div id="lbSeparator"></div>
     <div id="lbLeftPanel">
-        <div id="lbPlayerList">
-            <div id="sharelink">
-                <div id="sharetexts">
-                <h3 id="qrtitle"><?php echo $updtLBtexts[5][$lng] ?></h3>
-                <p id="qrlink" onclick="cplink()" ontouchstart="cplink()" title="<?php $updtLBtexts[6][$lng] ?>"></p>
-                </div>
-                <div id="qrcode"></div>
-            </div>
-            <h3><?php echo $updtLBtexts[1][$lng] ?></h3>
-            <ul>
-                <?php
-                    if (strlen($_SESSION['game']['playerList'] > 0)) {
-                        $playersArray = explode('┇', $gameData['game']['playerList']);
-                        $nb = 0;
 
-                        foreach ($playersArray as $playerobj) {
-                            $nb++;
-                            $playerArr = explode('┊', $playerobj);
-                            if ($playerArr[0] == $_SESSION['nickname'])
-                                echo '<li class="li' . ($nb % 2) . '"><span class="listnumber">' . $nb . '</span>' . $playerArr[0] . '<span class="listyou">' . $updtLBtexts[3][$lng] . '<span></li>';
-                            else 
-                                echo '<li class="li' . ($nb % 2) . '"><span class="listnumber">' . $nb . '</span>' . $playerArr[0] . '</li>';
-                        }
-                    }
-                ?>
-            </ul>
-        </div>
+        <?php include_once('lobby/playerList.php') ?>
+
         <?php if (isset($_SESSION['gameOwner']) && $_SESSION['gameOwner'] == $_SESSION['ID']) { ?>
         <hr id="lbhr">
         <div id="lbCommand">
             <button><?php echo $updtLBtexts[2][$lng] ?></button>
         </div>
         <?php } ?>
+
     </div>
 </div>
 
-<script>
-    var webpage = `http://${window.location.hostname}/Cosmocats/<?php echo $_SESSION['gameID'] ?>`;
-    var qrc = new QRCode(document.getElementById("qrcode"), webpage);
-    qrlink = document.getElementById("qrlink");
-    qrlink.innerText = webpage;
-
-    let timer1, timer2, timer3;
-    
-    async function cplink() {
-        clearTimeout(timer1);
-        clearTimeout(timer2);
-        clearTimeout(timer3);
-
-        let copiedstatus = await copytcb(webpage);
-        if (copiedstatus) {
-            qrlink.style.width = `${qrlink.getBoundingClientRect().width - 10}px`;
-            qrlink.style.textAlign = "center";
-            qrlink.style.backgroundColor = "var(--red)";
-
-            qrlink.innerText = "<?php echo $updtLBtexts[8][$lng] ?>";
-            timer1 = setTimeout(() => {
-                qrlink.style.backgroundColor = "var(--dark-red)";
-            }, 400);
-            timer2 = setTimeout(() => {
-                qrlink.style.backgroundColor = "";
-            }, 700);
-            timer3 = setTimeout(() => {
-                document.getElementById("qrlink").innerText = webpage;
-                qrlink.style.textAlign = "left";
-                
-            }, 2000);
-        }
-        else {
-            qrlink.style.width = `${qrlink.getBoundingClientRect().width - 10}px`;
-            qrlink.style.textAlign = "center";
-            qrlink.style.backgroundColor = "var(--green)";
-
-            qrlink.innerText = "<?php echo $updtLBtexts[7][$lng] ?>";
-            timer1 = setTimeout(() => {
-                qrlink.style.backgroundColor = "var(--dark-green)";
-            }, 400);
-            timer2 = setTimeout(() => {
-                qrlink.style.backgroundColor = "";
-            }, 700);
-            timer3 = setTimeout(() => {
-                document.getElementById("qrlink").innerText = webpage;
-                qrlink.style.textAlign = "left";
-            }, 2000);
-        }
-    }
-</script>
+<?php include_once('lobby/lobbyjs.php') ?>

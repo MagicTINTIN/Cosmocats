@@ -215,6 +215,8 @@ a:hover {
 /* Messages */
 
 .msg {
+    position: absolute;
+    left: 25vw;
     width: 50vw;
     padding: 8px;
     border-radius: 9px;
@@ -243,11 +245,13 @@ a:hover {
 }
 
 #errorMsg {
+    top: 15vh;
     animation: error .8s;
     color: var(--red);
 }
 
 #infoMsg {
+    top: 20vh;
     animation: info .8s;
     color: var(--green);
 }
