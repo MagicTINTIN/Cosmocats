@@ -41,10 +41,12 @@ if (isset($_SESSION['infoMsg'])) {
     <link href="styles/vars.css" rel="stylesheet">
     <link href="styles/styles.css" rel="stylesheet">
     <link href="styles/lobby.css" rel="stylesheet">
-
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script> -->
     <script src="./scripts/localWS.js"></script>
+    <script src="./scripts/load.js"></script>
 
     <meta name="author" content="ALC ProduXion/Softplus">
     <meta name="description" content="Game with cats which want to go to space">

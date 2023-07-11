@@ -61,11 +61,15 @@ $countrylistforjs = [
 
 ?>
 
+fullyinitialised = false;
 <?php foreach ( $countrylistforjs as $color => $name) { ?>
 
 var ctx<?php echo $color ?>;
 
 $('#<?php echo $color ?>Img').on("click", function (event) {
+    if (!fullyinitialised) 
+        setCtxNext()
+
     var x = event.pageX - this.offsetLeft,
         y = event.pageY - this.offsetTop;
 
@@ -94,38 +98,32 @@ $('#<?php echo $color ?>Img').on("click", function (event) {
 }
 ?>
 
-
-
-
-function setCtxold() {
+function setCtx() {
 <?php foreach ( array_reverse($countrylistforjs) as $color => $name) { ?>
-    ////////////////// <?php echo $color ?> \\\\\\\\\\\\\\\\\\
+    ////////////////// SET <?php echo $color ?> \\\\\\\\\\\\\\\\\\
 
+    ctx<?php echo $color ?> = document.createElement("canvas").getContext("2d");
+
+    object<?php echo $color ?> = $('#<?php echo $color ?>Img');
     
-
-    ctx<?php echo $color ?> = document.createElement("canvas<?php echo $color ?>").getContext("2d");
-
-    var object<?php echo $color ?> = $('#<?php echo $color ?>Img');
-    // Get click coordinates
-    var w<?php echo $color ?> = ctx<?php echo $color ?>.canvas.width = object<?php echo $color ?>.width,
-        h<?php echo $color ?> = ctx<?php echo $color ?>.canvas.height = object<?php echo $color ?>.height;
-    // Draw image to canvas
-    // and read Alpha channel value
-
-    ctx<?php echo $color ?>.drawImage(object<?php echo $color ?>, 0, 0, w<?php echo $color ?>, h<?php echo $color ?>);
-    console.log('ctx<?php echo $color ?> : ', ctx<?php echo $color ?>)
-    
-    var checkExist<?php echo $color ?> = setInterval(function() {
-        if ($('#canvas<?php echo $color ?>').length) {
-            console.log("Exists!");
-            clearInterval(checkExist<?php echo $color ?>);
-        }
-    }, 100)
-
 
 <?php } ?>    
 }
 
+function setCtxNext() {
+<?php foreach ( array_reverse($countrylistforjs) as $color => $name) { ?>
+    ////////////////// NEXT <?php echo $color ?> \\\\\\\\\\\\\\\\\\
+
+    var w<?php echo $color ?> = ctx<?php echo $color ?>.canvas.width = object<?php echo $color ?>.width,
+        h<?php echo $color ?> = ctx<?php echo $color ?>.canvas.height = object<?php echo $color ?>.height;
+
+    console.log('ctx<?php echo $color ?> : ', ctx<?php echo $color ?>,'\n','object<?php echo $color ?> : ', object<?php echo $color ?>)
+    ctx<?php echo $color ?>.drawImage(object<?php echo $color ?>, 0, 0, w<?php echo $color ?>, h<?php echo $color ?>);
+
+<?php } ?>
+
+    fullyinitialised = true;
+}
 
 Promise.all(Array.from(document.images).map(img => {
     if (img.complete)
@@ -138,7 +136,7 @@ Promise.all(Array.from(document.images).map(img => {
     if (results.every(res => res)) {
 
         console.log('all images loaded successfully');
-        setCtxold()
+        setCtx()
     }
     else
         console.log('some images failed to load, all finished loading');
