@@ -58,80 +58,13 @@
     height: calc( 9 * ( 70vw - 30px ) / 16 );
 }
 
-.countryBtn {
-    position: fixed;
-    width: calc( 70vw - 30px );
-    height: calc( 9 * ( 70vw - 30px ) / 16 );
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-    background-color: transparent;
-    /* background: #00000000; */
-}
-
 .countryImg {
 
     position: fixed;
     width: calc( 70vw - 30px );
     height: calc( 9 * ( 70vw - 30px ) / 16 );
-    transition: all 5s;
+    transition: all .5s;
 }
-
-/* .countryImg:hover {
-    background-color: #00000050;
-} */
-
-
-.countryBtn:hover {
-    background-color: #00000050;
-    /* background-color: transparent; */
-    /* background-color: #00000050; */
-}
-
-.blackTeam {
-    background-image: url('../images/map/elements/black/base.png');
-    background-position: center;
-    background-size: contain;
-}
-
-.grayTeam {
-    background-image: url('../images/map/elements/gray/base.png');
-    background-position: center;
-    background-size: contain;
-}
-
-.redTeam {
-    background-image: url('../images/map/elements/red/base.png');
-    background-position: center;
-    background-size: contain;
-}
-
-.greenTeam {
-    background-image: url('../images/map/elements/green/base.png');
-    background-position: center;
-    background-size: contain;
-}
-
-.yellowTeam {
-    background-image: url('../images/map/elements/yellow/base.png');
-    background-position: center;
-    background-size: contain;
-}
-
-.blueTeam {
-    background-image: url('../images/map/elements/blue/base.png');
-    background-position: center;
-    background-size: contain;
-}
-
-.whiteTeam {
-    background-image: url('../images/map/elements/white/base.png');
-    background-position: center;
-    background-size: contain;
-}/**/
 
 
 

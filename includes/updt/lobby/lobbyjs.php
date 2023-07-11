@@ -41,6 +41,7 @@ async function cplink() {
 <script>
 $("#backgroundMapImg").on("click", function () {
     console.log("Background image clicked!");
+    resetImages();
 });
 
 <?php 
@@ -62,6 +63,12 @@ globalPX = 0, globalPY = 0, globalCX = 0, globalCY = 0;
 function resetPE() {
     <?php foreach ( $countrylistforjs as $color => $name) { ?>
     document.getElementById('<?php echo $color ?>Img').style.pointerEvents = "auto";
+    <?php } ?>
+}
+
+function resetImages() {
+    <?php foreach ( $countrylistforjs as $color => $name) { ?>
+    document.getElementById('<?php echo $color ?>Img').src = 'images/map/elements/<?php echo $color ?>/base.png';
     <?php } ?>
 }
 
@@ -87,33 +94,20 @@ $('#<?php echo $color ?>Img').on("click", function (event) {
     }
     var x = eventPX - this.offsetLeft,
         y = eventPY - this.offsetTop;
-
-    // console.log("x", event.pageX, eventPX, event.clientX, eventPY, this.offsetLeft);
-
-    // console.log('ctx<?php echo $color ?>', ctx<?php echo $color ?>);
-    // console.log(`ctx<?php echo $color ?>.getImageData(${x}, ${y}, 1, 1)`)
-    // console.log(ctx<?php echo $color ?>.getImageData(x, y, 1, 1));
+        
     var alpha = ctx<?php echo $color ?>.getImageData(x, y, 1, 1).data[3];
-
-    // console.log(eventCX, eventCY,document.elementFromPoint(eventCX, eventCY));
-    // console.log('alpha <?php echo $color ?>', alpha);
 
     if (alpha === 0) {
         this.style.pointerEvents = "none";
         
         document.elementFromPoint(eventCX, eventCY).click();
-        //$(document.elementFromPoint(event.clientX, event.clientY)).trigger("click");
         <?php if ($color == "black") { ?>resetPE();<?php } ?>
         
     } else {
         console.log(`<?php echo $color ?> clicked!`);
         resetPE();
-        this.style.transition = 'all .5s';
-        this.style.filter = 'brightness(10) invert(1)';
-        setTimeout(() => {
-            this.style.filter = 'brightness(10) invert(.5)';
-            this.style.transition = 'all 8s';
-        }, 1000);
+        resetImages();
+        this.src = 'images/map/elements/<?php echo $color ?>/selected.png';
     }
 });
 
@@ -124,7 +118,6 @@ $('#<?php echo $color ?>Img').on("click", function (event) {
 function setCtx() {
 <?php foreach ( array_reverse($countrylistforjs) as $color => $name) { ?>
     ////////////////// SET <?php echo $color ?> \\\\\\\\\\\\\\\\\\
-
     ctx<?php echo $color ?> = document.createElement("canvas").getContext("2d");
     object<?php echo $color ?> = document.getElementById('<?php echo $color ?>Img');
     
@@ -136,15 +129,13 @@ function setCtx() {
 function setCtxDraw() {
 <?php foreach ( array_reverse($countrylistforjs) as $color => $name) { ?>
     ////////////////// DRAW <?php echo $color ?> \\\\\\\\\\\\\\\\\\
-
     var w<?php echo $color ?> = ctx<?php echo $color ?>.canvas.width = object<?php echo $color ?>.width,
         h<?php echo $color ?> = ctx<?php echo $color ?>.canvas.height = object<?php echo $color ?>.height;
 
-    // console.log('ctx<?php echo $color ?> : ', ctx<?php echo $color ?>,'\n','object<?php echo $color ?> : ', object<?php echo $color ?>)
     ctx<?php echo $color ?>.drawImage(object<?php echo $color ?>, 0, 0, w<?php echo $color ?>, h<?php echo $color ?>);
 
-<?php } ?>
 
+<?php } ?>
     fullyinitialised = true;
 }
 
@@ -162,7 +153,7 @@ Promise.all(Array.from(document.images).map(img => {
         setCtx()
     }
     else
-        console.log('some images failed to load, all finished loading\nIt might be a source of problem');
+        console.log('Some images failed to load, all finished loading\nIt might be a source of problem');
         setCtx()
 });
 
