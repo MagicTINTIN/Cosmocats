@@ -59,7 +59,6 @@
 }
 
 .countryBtn {
-    pointer-events:visibleStroke;
     position: fixed;
     width: calc( 70vw - 30px );
     height: calc( 9 * ( 70vw - 30px ) / 16 );
@@ -75,13 +74,15 @@
 
 .countryImg {
 
+    position: fixed;
     width: calc( 70vw - 30px );
     height: calc( 9 * ( 70vw - 30px ) / 16 );
+    transition: all 5s;
 }
 
-.countryImg:hover {
+/* .countryImg:hover {
     background-color: #00000050;
-}
+} */
 
 
 .countryBtn:hover {
