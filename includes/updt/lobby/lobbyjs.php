@@ -37,13 +37,8 @@ async function cplink() {
 
 </script>
 
-<?php if (true) { ?>
-<!-- <script>jQuery.noConflict();</script> -->
 
 <script>
-
-
-
 $("#backgroundMapImg").on("click", function () {
     console.log("Background image clicked!");
 });
@@ -62,35 +57,57 @@ $countrylistforjs = [
 ?>
 
 fullyinitialised = false;
+globalPX = 0, globalPY = 0, globalCX = 0, globalCY = 0;
+
+function resetPE() {
+    <?php foreach ( $countrylistforjs as $color => $name) { ?>
+    document.getElementById('<?php echo $color ?>Img').style.pointerEvents = "auto";
+    <?php } ?>
+}
+
 <?php foreach ( $countrylistforjs as $color => $name) { ?>
 
 var ctx<?php echo $color ?>;
 
 $('#<?php echo $color ?>Img').on("click", function (event) {
-    console.log('Clicked on : ', this);
-    if (!fullyinitialised) 
-        setCtxNext()
+    // console.log('Clicked on : ', this);
+    
+    var eventPX, eventPY, eventCX, eventCY;
+    if (event.pageX == 0 && event.pageY == 0 && event.clientX == 0 && event.clientY == 0) {
+        eventPX = globalPX;
+        eventPY = globalPY;
+        eventCX = globalCX;
+        eventCY = globalCY;
+    }
+    else {
+        eventPX = globalPX = event.pageX;
+        eventPY = globalPY = event.pageY;
+        eventCX = globalCX = event.clientX;
+        eventCY = globalCY = event.clientY;
+    }
+    var x = eventPX - this.offsetLeft,
+        y = eventPY - this.offsetTop;
 
-    var x = event.pageX - this.offsetLeft,
-        y = event.pageY - this.offsetTop;
+    // console.log("x", event.pageX, eventPX, event.clientX, eventPY, this.offsetLeft);
 
-    console.log("x", event.pageX, event.clientX, this.offsetLeft,  event.pageX - this.offsetLeft);
+    // console.log('ctx<?php echo $color ?>', ctx<?php echo $color ?>);
+    // console.log(`ctx<?php echo $color ?>.getImageData(${x}, ${y}, 1, 1)`)
+    // console.log(ctx<?php echo $color ?>.getImageData(x, y, 1, 1));
+    var alpha = ctx<?php echo $color ?>.getImageData(x, y, 1, 1).data[3];
 
-    console.log('ctx<?php echo $color ?>', ctx<?php echo $color ?>);
-    console.log(`ctx<?php echo $color ?>.getImageData(${x}, ${y}, 1, 1)`)
-    console.log(ctx<?php echo $color ?>.getImageData(x, y, 1, 1));
-    var alpha = ctx<?php echo $color ?>.getImageData(x, y, 1, 1).data[3]; // [0]R [1]G [2]B [3]A
+    // console.log(eventCX, eventCY,document.elementFromPoint(eventCX, eventCY));
+    // console.log('alpha <?php echo $color ?>', alpha);
 
-    // If pixel is transparent,
-    // retrieve the element underneath and trigger it's click event
-    console.log('alpha <?php echo $color ?>', alpha);
     if (alpha === 0) {
         this.style.pointerEvents = "none";
-        console.log(document.elementFromPoint(event.clientX, event.clientY));
-        $(document.elementFromPoint(event.clientX, event.clientY)).trigger("click");
-        this.style.pointerEvents = "auto";
+        
+        document.elementFromPoint(eventCX, eventCY).click();
+        //$(document.elementFromPoint(event.clientX, event.clientY)).trigger("click");
+        <?php if ($color == "black") { ?>resetPE();<?php } ?>
+        
     } else {
         console.log(`<?php echo $color ?> clicked!`);
+        resetPE();
         this.style.transition = 'all .5s';
         this.style.filter = 'brightness(10) invert(1)';
         setTimeout(() => {
@@ -109,21 +126,21 @@ function setCtx() {
     ////////////////// SET <?php echo $color ?> \\\\\\\\\\\\\\\\\\
 
     ctx<?php echo $color ?> = document.createElement("canvas").getContext("2d");
-
-    object<?php echo $color ?> = document.getElementById('<?php echo $color ?>Img');//$('#<?php echo $color ?>Img');
+    object<?php echo $color ?> = document.getElementById('<?php echo $color ?>Img');
     
 
-<?php } ?>    
+<?php } ?>
+    setCtxDraw()
 }
 
-function setCtxNext() {
+function setCtxDraw() {
 <?php foreach ( array_reverse($countrylistforjs) as $color => $name) { ?>
-    ////////////////// NEXT <?php echo $color ?> \\\\\\\\\\\\\\\\\\
+    ////////////////// DRAW <?php echo $color ?> \\\\\\\\\\\\\\\\\\
 
     var w<?php echo $color ?> = ctx<?php echo $color ?>.canvas.width = object<?php echo $color ?>.width,
         h<?php echo $color ?> = ctx<?php echo $color ?>.canvas.height = object<?php echo $color ?>.height;
 
-    console.log('ctx<?php echo $color ?> : ', ctx<?php echo $color ?>,'\n','object<?php echo $color ?> : ', object<?php echo $color ?>)
+    // console.log('ctx<?php echo $color ?> : ', ctx<?php echo $color ?>,'\n','object<?php echo $color ?> : ', object<?php echo $color ?>)
     ctx<?php echo $color ?>.drawImage(object<?php echo $color ?>, 0, 0, w<?php echo $color ?>, h<?php echo $color ?>);
 
 <?php } ?>
@@ -141,13 +158,12 @@ Promise.all(Array.from(document.images).map(img => {
 })).then(results => {
     if (results.every(res => res)) {
 
-        console.log('all images loaded successfully');
+        console.log('All images loaded successfully');
         setCtx()
     }
     else
-        console.log('some images failed to load, all finished loading');
+        console.log('some images failed to load, all finished loading\nIt might be a source of problem');
+        setCtx()
 });
 
 </script>
-
-<?php } ?>
