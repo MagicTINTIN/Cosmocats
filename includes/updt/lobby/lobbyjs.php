@@ -67,12 +67,18 @@ fullyinitialised = false;
 var ctx<?php echo $color ?>;
 
 $('#<?php echo $color ?>Img').on("click", function (event) {
+    console.log('Clicked on : ', this);
     if (!fullyinitialised) 
         setCtxNext()
 
     var x = event.pageX - this.offsetLeft,
         y = event.pageY - this.offsetTop;
 
+    console.log("x", event.pageX, event.clientX, this.offsetLeft,  event.pageX - this.offsetLeft);
+
+    console.log('ctx<?php echo $color ?>', ctx<?php echo $color ?>);
+    console.log(`ctx<?php echo $color ?>.getImageData(${x}, ${y}, 1, 1)`)
+    console.log(ctx<?php echo $color ?>.getImageData(x, y, 1, 1));
     var alpha = ctx<?php echo $color ?>.getImageData(x, y, 1, 1).data[3]; // [0]R [1]G [2]B [3]A
 
     // If pixel is transparent,
@@ -104,7 +110,7 @@ function setCtx() {
 
     ctx<?php echo $color ?> = document.createElement("canvas").getContext("2d");
 
-    object<?php echo $color ?> = $('#<?php echo $color ?>Img');
+    object<?php echo $color ?> = document.getElementById('<?php echo $color ?>Img');//$('#<?php echo $color ?>Img');
     
 
 <?php } ?>    
